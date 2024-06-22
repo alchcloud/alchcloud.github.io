@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-ball {
+  @apply ui--z-20 ui-opacity-50 ui-h-96 ui-w-96 ui-absolute ui-left-[calc(50%-12rem)] ui-top-[calc(50%-12rem)] ui-rounded-full ui-blur-3xl;
+}
