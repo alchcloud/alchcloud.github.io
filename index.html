@@ -1,59 +1,975 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alchemistic Cloud</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body class="ui-font-sans">
-    <main class="ui-h-screen ui-w-full ui-p-2">
-      <div
-        class="ui-h-full ui-w-full ui-flex ui-justify-center ui-items-center"
-      >
-        <div
-          class="ui-absolute ui-top-0 ui-left-0 ui-h-full ui-w-full ui--z-10 ui-overflow-hidden"
-        >
-          <div
-            class="ui-to-water-200/50 ui-absolute ui-h-full ui-w-full ui-top-0 ui-left-0 ui-bg-gradient-to-b ui-from-white/80"
-          ></div>
-          <div
-            class="ui-bg-earth-500 ui-translate-x-48 ui-translate-y-32 ui-animate-[pulse_5s_cubic-bezier(0.4,0,0.6,1)_infinite] bg-ball"
-          ></div>
-          <div
-            class="ui-bg-spirit-500 ui--translate-y-40 ui-animate-[pulse_5s_cubic-bezier(0.4,0,0.6,1)_infinite_1s] bg-ball"
-          ></div>
-          <div
-            class="ui-bg-gold-500 ui--translate-x-48 ui-translate-y-32 ui-animate-[pulse_5s_cubic-bezier(0.4,0,0.6,1)_infinite_2s] bg-ball"
-          ></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alchemistic Cloud - Innovative Cloud Solutions</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="icon" type="image/png" href="./favicon.png">
+    <link rel="apple-touch-icon" href="./favicon.png">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007883;
+            --primary-color-dark: #006670;
+            --primary-color-light: rgba(0, 120, 131, 0.1);
+            --secondary-color: #530530;
+            --secondary-color-dark: #420426;
+            --secondary-color-light: rgba(83, 5, 48, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .scroll-mt-20 {
+            scroll-margin-top: 5rem;
+        }
+
+        .bg-primary {
+            background-color: var(--primary-color);
+        }
+
+        .bg-primary-light {
+            background-color: var(--primary-color-light);
+        }
+
+        .bg-secondary {
+            background-color: var(--secondary-color);
+        }
+
+        .bg-secondary-light {
+            background-color: var(--secondary-color-light);
+        }
+
+        .text-primary {
+            color: var(--primary-color);
+        }
+
+        .text-secondary {
+            color: var(--secondary-color);
+        }
+
+        .hover\:bg-primary-dark:hover {
+            background-color: var(--primary-color-dark);
+        }
+
+        .hover\:text-primary:hover {
+            color: var(--primary-color);
+        }
+
+        .hover\:text-secondary:hover {
+            color: var(--secondary-color);
+        }
+
+        .border-primary {
+            border-color: var(--primary-color);
+        }
+
+        .border-secondary {
+            border-color: var(--secondary-color);
+        }
+
+        .bg-gradient-to-r {
+            background: linear-gradient(to right, var(--primary-color), var(--primary-color-dark));
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .methodology-card {
+            transition: all 0.3s ease;
+        }
+
+        .methodology-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .methodology-icon {
+            transition: all 0.3s ease;
+        }
+
+        .methodology-card:hover .methodology-icon {
+            transform: scale(1.1);
+        }
+
+        .methodology-connector {
+            position: relative;
+        }
+
+        .methodology-connector::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -30px;
+            width: 60px;
+            height: 2px;
+            background-color: #e5e7eb;
+            z-index: 0;
+        }
+
+        .methodology-connector:last-child::after {
+            display: none;
+        }
+
+        /* Fixed circle for benefit numbers */
+        .benefit-number {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 768px) {
+            .methodology-connector::after {
+                display: none;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .md\:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .md\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .md\:order-1 {
+                order: 1;
+            }
+
+            .md\:order-2 {
+                order: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .lg\:grid-cols-4 {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+
+            .lg\:text-6xl {
+                font-size: 3.75rem;
+                line-height: 1;
+            }
+        }
+
+        /* Toast Styles */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 2rem;
+            background-color: white;
+            color: var(--primary-color);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transform: translateY(100%);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-white">
+    <!-- Header - Now fully opaque -->
+    <header class="sticky top-0 z-50 border-b border-gray-100 bg-white py-4">
+        <div class="container mx-auto flex items-center justify-between px-4 md:px-6">
+            <div class="flex items-center">
+                <img src="./logo.png" alt="Alchemistic Cloud" width="140" height="30" class="h-auto w-auto max-h-8">
+            </div>
+            <nav class="hidden md:block">
+                <ul class="flex items-center gap-8">
+                    <li>
+                        <a href="#solutions"
+                            class="text-sm font-medium text-gray-700 hover:text-primary transition-colors">
+                            Solutions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#benefits"
+                            class="text-sm font-medium text-gray-700 hover:text-primary transition-colors">
+                            Benefits
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contact"
+                            class="text-sm font-medium text-gray-700 hover:text-primary transition-colors">
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="#contact"
+                    class="rounded-full bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-dark transition-colors">
+                    Get Started
+                </a>
+                <button class="md:hidden" id="mobile-menu-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="h-6 w-6 text-gray-700">
+                        <line x1="4" x2="20" y1="12" y2="12"></line>
+                        <line x1="4" x2="20" y1="6" y2="6"></line>
+                        <line x1="4" x2="20" y1="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
         </div>
-        <div>
-          <svg
-            width="100%"
-            viewBox="0 0 2281 445"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            class="ui-max-w-md"
-          >
-            <path
-              d="M0.4 366L125.2 86H189.2L314.4 366H246.4L144 118.8H169.6L66.8 366H0.4ZM62.8 306L80 256.8H224L241.6 306H62.8ZM319.05 366V69.2H381.45V366H319.05ZM523.363 369.2C500.163 369.2 479.496 364.533 461.363 355.2C443.229 345.6 428.963 332.4 418.563 315.6C408.429 298.8 403.363 279.733 403.363 258.4C403.363 236.8 408.429 217.733 418.563 201.2C428.963 184.4 443.229 171.333 461.363 162C479.496 152.4 500.163 147.6 523.363 147.6C546.029 147.6 565.763 152.4 582.563 162C599.363 171.333 611.763 184.8 619.763 202.4L571.363 228.4C565.763 218.267 558.696 210.8 550.163 206C541.896 201.2 532.829 198.8 522.963 198.8C512.296 198.8 502.696 201.2 494.163 206C485.629 210.8 478.829 217.6 473.763 226.4C468.963 235.2 466.563 245.867 466.563 258.4C466.563 270.933 468.963 281.6 473.763 290.4C478.829 299.2 485.629 306 494.163 310.8C502.696 315.6 512.296 318 522.963 318C532.829 318 541.896 315.733 550.163 311.2C558.696 306.4 565.763 298.8 571.363 288.4L619.763 314.8C611.763 332.133 599.363 345.6 582.563 355.2C565.763 364.533 546.029 369.2 523.363 369.2Z"
-              fill="#007883"
-            />
-            <path
-              d="M766.491 147.6C783.557 147.6 798.757 151.067 812.091 158C825.691 164.667 836.357 175.067 844.091 189.2C851.824 203.067 855.691 220.933 855.691 242.8V366H793.291V252.4C793.291 235.067 789.424 222.267 781.691 214C774.224 205.733 763.557 201.6 749.691 201.6C739.824 201.6 730.891 203.733 722.891 208C715.157 212 709.024 218.267 704.491 226.8C700.224 235.333 698.091 246.267 698.091 259.6V366H635.691V69.2H698.091V210.4L684.091 192.4C691.824 178 702.891 166.933 717.291 159.2C731.691 151.467 748.091 147.6 766.491 147.6ZM1000.62 369.2C976.082 369.2 954.482 364.4 935.816 354.8C917.416 345.2 903.149 332.133 893.016 315.6C882.882 298.8 877.816 279.733 877.816 258.4C877.816 236.8 882.749 217.733 892.616 201.2C902.749 184.4 916.482 171.333 933.816 162C951.149 152.4 970.749 147.6 992.616 147.6C1013.68 147.6 1032.62 152.133 1049.42 161.2C1066.48 170 1079.95 182.8 1089.82 199.6C1099.68 216.133 1104.62 236 1104.62 259.2C1104.62 261.6 1104.48 264.4 1104.22 267.6C1103.95 270.533 1103.68 273.333 1103.42 276H928.616V239.6H1070.62L1046.62 250.4C1046.62 239.2 1044.35 229.467 1039.82 221.2C1035.28 212.933 1029.02 206.533 1021.02 202C1013.02 197.2 1003.68 194.8 993.016 194.8C982.349 194.8 972.882 197.2 964.616 202C956.616 206.533 950.349 213.067 945.816 221.6C941.282 229.867 939.016 239.733 939.016 251.2V260.8C939.016 272.533 941.549 282.933 946.616 292C951.949 300.8 959.282 307.6 968.616 312.4C978.216 316.933 989.416 319.2 1002.22 319.2C1013.68 319.2 1023.68 317.467 1032.22 314C1041.02 310.533 1049.02 305.333 1056.22 298.4L1089.42 334.4C1079.55 345.6 1067.15 354.267 1052.22 360.4C1037.28 366.267 1020.08 369.2 1000.62 369.2ZM1401.76 147.6C1418.83 147.6 1433.89 151.067 1446.96 158C1460.29 164.667 1470.69 175.067 1478.16 189.2C1485.89 203.067 1489.76 220.933 1489.76 242.8V366H1427.36V252.4C1427.36 235.067 1423.76 222.267 1416.56 214C1409.36 205.733 1399.23 201.6 1386.16 201.6C1377.09 201.6 1368.96 203.733 1361.76 208C1354.56 212 1348.96 218.133 1344.96 226.4C1340.96 234.667 1338.96 245.2 1338.96 258V366H1276.56V252.4C1276.56 235.067 1272.96 222.267 1265.76 214C1258.83 205.733 1248.83 201.6 1235.76 201.6C1226.69 201.6 1218.56 203.733 1211.36 208C1204.16 212 1198.56 218.133 1194.56 226.4C1190.56 234.667 1188.56 245.2 1188.56 258V366H1126.16V150.8H1185.76V209.6L1174.56 192.4C1182.03 177.733 1192.56 166.667 1206.16 159.2C1220.03 151.467 1235.76 147.6 1253.36 147.6C1273.09 147.6 1290.29 152.667 1304.96 162.8C1319.89 172.667 1329.76 187.867 1334.56 208.4L1312.56 202.4C1319.76 185.6 1331.23 172.267 1346.96 162.4C1362.96 152.533 1381.23 147.6 1401.76 147.6ZM1525.69 366V150.8H1588.09V366H1525.69ZM1556.89 120.8C1545.42 120.8 1536.09 117.467 1528.89 110.8C1521.69 104.133 1518.09 95.8666 1518.09 86C1518.09 76.1333 1521.69 67.8667 1528.89 61.2C1536.09 54.5333 1545.42 51.2 1556.89 51.2C1568.36 51.2 1577.69 54.4 1584.89 60.8C1592.09 66.9333 1595.69 74.9333 1595.69 84.8C1595.69 95.2 1592.09 103.867 1584.89 110.8C1577.96 117.467 1568.62 120.8 1556.89 120.8ZM1698.4 369.2C1680 369.2 1662.27 367.067 1645.2 362.8C1628.4 358.267 1615.07 352.667 1605.2 346L1626 301.2C1635.87 307.333 1647.47 312.4 1660.8 316.4C1674.4 320.133 1687.74 322 1700.8 322C1715.2 322 1725.34 320.267 1731.2 316.8C1737.34 313.333 1740.4 308.533 1740.4 302.4C1740.4 297.333 1738 293.6 1733.2 291.2C1728.67 288.533 1722.54 286.533 1714.8 285.2C1707.07 283.867 1698.54 282.533 1689.2 281.2C1680.14 279.867 1670.94 278.133 1661.6 276C1652.27 273.6 1643.74 270.133 1636 265.6C1628.27 261.067 1622 254.933 1617.2 247.2C1612.67 239.467 1610.4 229.467 1610.4 217.2C1610.4 203.6 1614.27 191.6 1622 181.2C1630 170.8 1641.47 162.667 1656.4 156.8C1671.34 150.667 1689.2 147.6 1710 147.6C1724.67 147.6 1739.6 149.2 1754.8 152.4C1770 155.6 1782.67 160.267 1792.8 166.4L1772 210.8C1761.6 204.667 1751.07 200.533 1740.4 198.4C1730 196 1719.87 194.8 1710 194.8C1696.14 194.8 1686 196.667 1679.6 200.4C1673.2 204.133 1670 208.933 1670 214.8C1670 220.133 1672.27 224.133 1676.8 226.8C1681.6 229.467 1687.87 231.6 1695.6 233.2C1703.34 234.8 1711.74 236.267 1720.8 237.6C1730.14 238.667 1739.47 240.4 1748.8 242.8C1758.14 245.2 1766.54 248.667 1774 253.2C1781.74 257.467 1788 263.467 1792.8 271.2C1797.6 278.667 1800 288.533 1800 300.8C1800 314.133 1796 326 1788 336.4C1780 346.533 1768.4 354.533 1753.2 360.4C1738.27 366.267 1720 369.2 1698.4 369.2ZM1906.5 369.2C1881.17 369.2 1861.44 362.8 1847.3 350C1833.17 336.933 1826.1 317.6 1826.1 292V103.2H1888.5V291.2C1888.5 300.267 1890.9 307.333 1895.7 312.4C1900.5 317.2 1907.04 319.6 1915.3 319.6C1925.17 319.6 1933.57 316.933 1940.5 311.6L1957.3 355.6C1950.9 360.133 1943.17 363.6 1934.1 366C1925.3 368.133 1916.1 369.2 1906.5 369.2ZM1792.9 203.6V155.6H1942.1V203.6H1792.9ZM1972.33 366V150.8H2034.73V366H1972.33ZM2003.53 120.8C1992.06 120.8 1982.73 117.467 1975.53 110.8C1968.33 104.133 1964.73 95.8666 1964.73 86C1964.73 76.1333 1968.33 67.8667 1975.53 61.2C1982.73 54.5333 1992.06 51.2 2003.53 51.2C2015 51.2 2024.33 54.4 2031.53 60.8C2038.73 66.9333 2042.33 74.9333 2042.33 84.8C2042.33 95.2 2038.73 103.867 2031.53 110.8C2024.6 117.467 2015.26 120.8 2003.53 120.8ZM2176.64 369.2C2153.44 369.2 2132.78 364.533 2114.64 355.2C2096.51 345.6 2082.24 332.4 2071.84 315.6C2061.71 298.8 2056.64 279.733 2056.64 258.4C2056.64 236.8 2061.71 217.733 2071.84 201.2C2082.24 184.4 2096.51 171.333 2114.64 162C2132.78 152.4 2153.44 147.6 2176.64 147.6C2199.31 147.6 2219.04 152.4 2235.84 162C2252.64 171.333 2265.04 184.8 2273.04 202.4L2224.64 228.4C2219.04 218.267 2211.98 210.8 2203.44 206C2195.18 201.2 2186.11 198.8 2176.24 198.8C2165.58 198.8 2155.98 201.2 2147.44 206C2138.91 210.8 2132.11 217.6 2127.04 226.4C2122.24 235.2 2119.84 245.867 2119.84 258.4C2119.84 270.933 2122.24 281.6 2127.04 290.4C2132.11 299.2 2138.91 306 2147.44 310.8C2155.98 315.6 2165.58 318 2176.24 318C2186.11 318 2195.18 315.733 2203.44 311.2C2211.98 306.4 2219.04 298.8 2224.64 288.4L2273.04 314.8C2265.04 332.133 2252.64 345.6 2235.84 355.2C2219.04 364.533 2199.31 369.2 2176.64 369.2Z"
-              fill="#530530"
-            />
-          </svg>
-          <p class="ui-text-right ui-text-2xl">coming soon...</p>
+
+        <!-- Mobile Menu - Also fully opaque -->
+        <div class="mobile-menu md:hidden" id="mobile-menu">
+            <nav class="container mx-auto px-4 py-4 bg-white border-t border-gray-100">
+                <ul class="flex flex-col space-y-4">
+                    <li>
+                        <a href="#solutions" class="block text-base font-medium text-gray-700 hover:text-primary">
+                            Solutions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#benefits" class="block text-base font-medium text-gray-700 hover:text-primary">
+                            Benefits
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="block text-base font-medium text-gray-700 hover:text-primary">
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-      </div>
-    </main>
-  </body>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-16 md:py-24">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid items-center gap-12 md:grid-cols-2">
+                <div class="space-y-6">
+                    <div class="inline-block rounded-full bg-primary-light px-4 py-1 text-sm font-medium text-primary">
+                        Innovative Cloud Solutions
+                    </div>
+                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
+                        Transform Your Business with Cloud Technology
+                    </h1>
+                    <p class="text-lg text-gray-600 md:text-xl">
+                        Alchemistic Cloud provides enterprise-grade solutions that help businesses scale, innovate, and
+                        thrive
+                        in the digital landscape.
+                    </p>
+                    <div class="flex flex-col gap-4 sm:flex-row">
+                        <a href="#solutions"
+                            class="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-base font-medium text-white hover:bg-primary-dark transition-colors">
+                            Explore Solutions
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="ml-2 h-4 w-4">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <a href="#contact"
+                            class="inline-flex items-center justify-center rounded-full border border-gray-300 bg-white px-6 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                            Schedule a Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="relative h-[400px] w-full rounded-2xl overflow-hidden">
+                    <img src="./hero_illustration.jpeg" alt="Cloud Technology Visualization"
+                        class="object-cover w-full h-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services/Solutions Overview -->
+    <section id="solutions" class="bg-gray-50 py-16 md:py-24 scroll-mt-20">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="mx-auto max-w-3xl text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">Our Specialized Solutions</h2>
+                <p class="mt-4 text-lg text-gray-600">
+                    We provide end-to-end cloud and software solutions tailored to your business needs.
+                </p>
+            </div>
+            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Service Card 1 -->
+                <div class="rounded-xl bg-white p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="h-6 w-6 text-primary">
+                            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="mb-3 text-xl font-bold text-gray-900">Cloud Infrastructure Setup</h3>
+                    <p class="text-gray-600 mb-4">
+                        We architect and deploy robust cloud environments on AWS and GCP platforms, optimized for your
+                        specific
+                        workloads and requirements.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                            <span>AWS and GCP expert architects</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                            <span>Secure network configuration</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                            <span>Scalable resource management</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="rounded-xl bg-white p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-secondary-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="h-6 w-6 text-secondary">
+                            <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path>
+                            <path d="M3 15h14a2 2 0 1 1 0 4H3"></path>
+                            <path d="m12 22 4-4"></path>
+                            <path d="m9 14 3 3 3-3"></path>
+                        </svg>
+                    </div>
+                    <h3 class="mb-3 text-xl font-bold text-gray-900">AI Dashboard Tools</h3>
+                    <p class="text-gray-600 mb-4">
+                        Our AI-powered dashboards transform complex data into actionable insights, enabling data-driven
+                        decision
+                        making across your organization.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                            <span>Real-time data visualization</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                            <span>Predictive analytics</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                            <span>Custom reporting solutions</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="rounded-xl bg-white p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="h-6 w-6 text-primary">
+                            <path d="m18 16 4-4-4-4"></path>
+                            <path d="m6 8-4 4 4 4"></path>
+                            <path d="m14.5 4-5 16"></path>
+                        </svg>
+                    </div>
+                    <h3 class="mb-3 text-xl font-bold text-gray-900">Custom Software Solutions</h3>
+                    <p class="text-gray-600 mb-4">
+                        We design and develop bespoke software solutions that address your unique business challenges
+                        and drive
+                        operational efficiency.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                            <span>Web and mobile applications</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                            <span>API development and integration</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                            <span>Legacy system modernization</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="rounded-xl bg-white p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-secondary-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="h-6 w-6 text-secondary">
+                            <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
+                            <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
+                            <line x1="6" x2="6.01" y1="6" y2="6"></line>
+                            <line x1="6" x2="6.01" y1="18" y2="18"></line>
+                        </svg>
+                    </div>
+                    <h3 class="mb-3 text-xl font-bold text-gray-900">Maintenance & Support</h3>
+                    <p class="text-gray-600 mb-4">
+                        We provide comprehensive maintenance and support services for your servers and software,
+                        ensuring
+                        optimal performance and reliability.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                            <span>24/7 monitoring and support</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                            <span>Regular updates and security patches</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                            <span>Performance optimization</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 5 - IT Consulting & Strategy -->
+                <div class="rounded-xl bg-white p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="h-6 w-6 text-primary">
+                            <path
+                                d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z">
+                            </path>
+                            <path d="M13 5v2"></path>
+                            <path d="M13 17v2"></path>
+                            <path d="M13 11v2"></path>
+                        </svg>
+                    </div>
+                    <h3 class="mb-3 text-xl font-bold text-gray-900">IT Consulting & Strategy</h3>
+                    <p class="text-gray-600 mb-4">
+                        Our expert consultants help you develop comprehensive IT strategies aligned with your business
+                        goals and
+                        industry best practices.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                            <span>Technology roadmap development</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                            <span>IT infrastructure assessment</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                            <span>Digital transformation planning</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 6 - SAP Fiori Consultant -->
+                <div class="rounded-xl bg-white p-8 shadow-sm transition-all hover:shadow-md">
+                    <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-secondary-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="h-6 w-6 text-secondary">
+                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+                            <path d="M7 7h10"></path>
+                            <path d="M7 12h10"></path>
+                            <path d="M7 17h10"></path>
+                        </svg>
+                    </div>
+                    <h3 class="mb-3 text-xl font-bold text-gray-900">SAP Fiori Consulting</h3>
+                    <p class="text-gray-600 mb-4">
+                        We provide specialized SAP Fiori expertise to help you create intuitive, responsive user
+                        experiences for
+                        your SAP applications.
+                    </p>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                            <span>SAP Fiori app development</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                            <span>UX/UI design for SAP systems</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                            <span>SAP Fiori implementation & integration</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section - Fixed circle numbers -->
+    <section id="benefits" class="py-16 md:py-24 scroll-mt-20">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid items-center gap-12 md:grid-cols-2">
+                <div class="order-2 md:order-1">
+                    <div class="relative h-[400px] w-full rounded-2xl overflow-hidden">
+                        <img src="./why_section_red.svg" alt="Business Growth Visualization"
+                            class="object-cover w-full h-full">
+                    </div>
+                </div>
+                <div class="order-1 space-y-6 md:order-2">
+                    <h2 class="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
+                        Why Choose Alchemistic Cloud?
+                    </h2>
+                    <div class="space-y-4">
+                        <!-- Benefit 1 - Fixed circle -->
+                        <div class="flex gap-4">
+                            <div class="benefit-number bg-primary">
+                                <span class="text-sm font-medium text-white">1</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900">Scalable Solutions</h3>
+                                <p class="mt-2 text-gray-600">
+                                    Our solutions grow with your business, ensuring you always have the resources you
+                                    need.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Benefit 2 - Fixed circle -->
+                        <div class="flex gap-4">
+                            <div class="benefit-number bg-primary">
+                                <span class="text-sm font-medium text-white">2</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900">Enterprise-Grade Security</h3>
+                                <p class="mt-2 text-gray-600">
+                                    Protect your data and applications with our comprehensive security measures.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Benefit 3 - Fixed circle -->
+                        <div class="flex gap-4">
+                            <div class="benefit-number bg-primary">
+                                <span class="text-sm font-medium text-white">3</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900">Cost Optimization</h3>
+                                <p class="mt-2 text-gray-600">
+                                    Maximize your ROI with our cost-effective cloud solutions and optimization
+                                    strategies.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Benefit 4 - Fixed circle -->
+                        <div class="flex gap-4">
+                            <div class="benefit-number bg-primary">
+                                <span class="text-sm font-medium text-white">4</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900">24/7 Expert Support</h3>
+                                <p class="mt-2 text-gray-600">
+                                    Our team of cloud experts is always available to help you with any issues or
+                                    questions.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Our Approach Section -->
+    <section id="approach" class="bg-gray-50 py-16 md:py-24 scroll-mt-20">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="mx-auto max-w-3xl text-center mb-12">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">Our Methodology</h2>
+                <p class="mt-4 text-lg text-gray-600">
+                    We follow a proven, systematic approach to deliver successful projects and ensure client
+                    satisfaction at every step.
+                </p>
+            </div>
+
+            <div class="relative">
+                <!-- Process Flow Line (Desktop only) -->
+                <div class="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 z-0"></div>
+
+                <div class="grid gap-8 md:grid-cols-4 relative z-10">
+                    <!-- Step 1: Discovery -->
+                    <div
+                        class="methodology-card methodology-connector bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all">
+                        <div class="mb-6 flex flex-col items-center">
+                            <div
+                                class="methodology-icon mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary-light p-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="h-10 w-10 text-primary">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                            </div>
+                            <span
+                                class="inline-flex items-center justify-center rounded-full bg-primary px-4 py-1 text-sm font-medium text-white">Step
+                                1</span>
+                            <h3 class="mt-3 text-2xl font-bold text-gray-900">Discovery</h3>
+                        </div>
+                        <p class="text-gray-600 text-center">
+                            We begin by understanding your business goals, challenges, and technical requirements
+                            through in-depth consultations.
+                        </p>
+                        <ul class="mt-4 space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                                <span>Stakeholder interviews</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                                <span>Requirements gathering</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                                <span>Current state assessment</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 2: Strategy -->
+                    <div
+                        class="methodology-card methodology-connector bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all">
+                        <div class="mb-6 flex flex-col items-center">
+                            <div
+                                class="methodology-icon mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-secondary-light p-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="h-10 w-10 text-secondary">
+                                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                                </svg>
+                            </div>
+                            <span
+                                class="inline-flex items-center justify-center rounded-full bg-secondary px-4 py-1 text-sm font-medium text-white">Step
+                                2</span>
+                            <h3 class="mt-3 text-2xl font-bold text-gray-900">Strategy</h3>
+                        </div>
+                        <p class="text-gray-600 text-center">
+                            Our experts develop a tailored solution strategy and implementation roadmap aligned with
+                            your business objectives.
+                        </p>
+                        <ul class="mt-4 space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                                <span>Solution architecture</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                                <span>Technology selection</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                                <span>Project planning</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 3: Implementation -->
+                    <div
+                        class="methodology-card methodology-connector bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all">
+                        <div class="mb-6 flex flex-col items-center">
+                            <div
+                                class="methodology-icon mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-primary-light p-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="h-10 w-10 text-primary">
+                                    <path d="m8 3 4 8 5-5 5 15H2L8 3z"></path>
+                                </svg>
+                            </div>
+                            <span
+                                class="inline-flex items-center justify-center rounded-full bg-primary px-4 py-1 text-sm font-medium text-white">Step
+                                3</span>
+                            <h3 class="mt-3 text-2xl font-bold text-gray-900">Implementation</h3>
+                        </div>
+                        <p class="text-gray-600 text-center">
+                            We build and deploy your solution using agile methodologies and industry best practices for
+                            optimal results.
+                        </p>
+                        <ul class="mt-4 space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                                <span>Agile development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                                <span>Continuous integration</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                                <span>Quality assurance</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 4: Optimization -->
+                    <div class="methodology-card bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all">
+                        <div class="mb-6 flex flex-col items-center">
+                            <div
+                                class="methodology-icon mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-secondary-light p-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="h-10 w-10 text-secondary">
+                                    <path d="M12 20h9"></path>
+                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                </svg>
+                            </div>
+                            <span
+                                class="inline-flex items-center justify-center rounded-full bg-secondary px-4 py-1 text-sm font-medium text-white">Step
+                                4</span>
+                            <h3 class="mt-3 text-2xl font-bold text-gray-900">Optimization</h3>
+                        </div>
+                        <p class="text-gray-600 text-center">
+                            We continuously monitor, maintain, and optimize your solution for peak performance and
+                            long-term success.
+                        </p>
+                        <ul class="mt-4 space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                                <span>Performance monitoring</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                                <span>Continuous improvement</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2 mt-1 h-1.5 w-1.5 rounded-full bg-secondary"></span>
+                                <span>Proactive maintenance</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action / Contact -->
+    <section id="contact" class="bg-gradient-to-r py-16 md:py-24 scroll-mt-20">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="mx-auto max-w-3xl text-center">
+                <h2 class="text-3xl font-bold tracking-tight text-white md:text-4xl">
+                    Ready to Transform Your Business?
+                </h2>
+                <p class="mt-4 text-lg text-white/90">
+                    Get in touch with our team to discuss how we can help you achieve your business goals.
+                </p>
+
+                <div class="mt-8 rounded-xl bg-white/10 p-8 backdrop-blur-sm">
+                    <form id="contactForm" class="space-y-4">
+                        <div class="grid gap-4 md:grid-cols-2">
+                            <div>
+                                <label for="name" class="sr-only">
+                                    Full Name
+                                </label>
+                                <input id="name" name="name" type="text" placeholder="Full Name"
+                                    class="w-full rounded-lg border-0 bg-white/80 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-white"
+                                    required />
+                            </div>
+                            <div>
+                                <label for="email" class="sr-only">
+                                    Email
+                                </label>
+                                <input id="email" name="email" type="email" placeholder="Email"
+                                    class="w-full rounded-lg border-0 bg-white/80 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-white"
+                                    required />
+                            </div>
+                        </div>
+                        <div>
+                            <label for="company" class="sr-only">
+                                Company
+                            </label>
+                            <input id="company" name="company" type="text" placeholder="Company"
+                                class="w-full rounded-lg border-0 bg-white/80 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-white" />
+                        </div>
+                        <div>
+                            <label for="message" class="sr-only">
+                                Message
+                            </label>
+                            <textarea id="message" name="message" rows="4" placeholder="How can we help you?"
+                                class="w-full rounded-lg border-0 bg-white/80 p-3 text-gray-900 shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-white"
+                                required></textarea>
+                        </div>
+                        <button type="submit"
+                            class="inline-flex w-full items-center justify-center rounded-lg bg-white px-6 py-3 text-base font-medium text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary sm:w-auto">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" role="alert">
+        Message sent successfully!
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 text-gray-300">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid gap-8 md:grid-cols-2">
+                <div>
+                    <img src="./logo.png" alt="Alchemistic Cloud" width="120" height="25"
+                        class="h-auto w-auto max-h-7 brightness-200 contrast-200 invert" />
+                    <p class="mt-4 max-w-xs text-gray-400">
+                        Transforming businesses through innovative cloud solutions and custom software development.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="mb-4 text-lg font-semibold text-white">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <span class="mr-2 text-gray-400">Email:</span>
+                            <a href="mailto:admin@alchemistic.cloud"
+                                class="text-gray-400 hover:text-white transition-colors">
+                                admin@alchemistic.cloud
+                            </a>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2 text-gray-400">Address:</span>
+                            <span class="text-gray-400">No. 32, Jalan Besar, 35500 Bidor, Perak, Malaysia</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+                <p>©
+                    <script>document.write(new Date().getFullYear())</script> Alchemistic Cloud. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuButton.addEventListener('click', function () {
+                mobileMenu.classList.toggle('active');
+
+                // Change the icon when menu is open
+                if (mobileMenu.classList.contains('active')) {
+                    menuButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-gray-700">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          `;
+                } else {
+                    menuButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-gray-700">
+              <line x1="4" x2="20" y1="12" y2="12"></line>
+              <line x1="4" x2="20" y1="6" y2="6"></line>
+              <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+          `;
+                }
+            });
+
+            // Close mobile menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    mobileMenu.classList.remove('active');
+                    menuButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-gray-700">
+              <line x1="4" x2="20" y1="12" y2="12"></line>
+              <line x1="4" x2="20" y1="6" y2="6"></line>
+              <line x1="4" x2="20" y1="18" y2="18"></line>
+            </svg>
+          `;
+                });
+            });
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get the submit button
+            const submitButton = this.querySelector('button[type="submit"]');
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-primary inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Sending...
+            `;
+
+            const formData = {
+                service_id: "service_pl7jg3s",
+                template_id: "template_nw95w8w",
+                user_id: "EwTz5OJsrSkGjZeZ9",
+                template_params:
+                {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    company: document.getElementById('company').value,
+                    message: document.getElementById('message').value
+                }
+            };
+
+            fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(data => {
+                    // Show toast
+                    const toast = document.getElementById('toast');
+                    toast.classList.add('show');
+                    
+                    // Reset form
+                    document.getElementById('contactForm').reset();
+                    
+                    // Hide toast after 3 seconds
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    const toast = document.getElementById('toast');
+                    toast.textContent = 'Failed to send message. Please try again later.';
+                    toast.classList.add('show');
+                    
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+                })
+                .finally(() => {
+                    // Re-enable button and restore original text
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Send Message';
+                });
+        });
+    </script>
+</body>
+
 </html>
