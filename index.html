@@ -7,17 +7,19 @@
     <title>Alchemistic Cloud - Innovative Cloud Solutions</title>
     <!-- Social Media Meta Tags -->
     <meta property="og:title" content="Alchemistic Cloud - Innovative Cloud Solutions">
-    <meta property="og:description" content="Transform your business with enterprise-grade cloud solutions, AI dashboards, and custom software development.">
+    <meta property="og:description"
+        content="Transform your business with enterprise-grade cloud solutions, AI dashboards, and custom software development.">
     <meta property="og:image" content="./hero_illustration.jpeg">
     <meta property="og:url" content="https://alchemistic.cloud">
     <meta property="og:type" content="website">
-    
+
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Alchemistic Cloud - Innovative Cloud Solutions">
-    <meta name="twitter:description" content="Transform your business with enterprise-grade cloud solutions, AI dashboards, and custom software development.">
+    <meta name="twitter:description"
+        content="Transform your business with enterprise-grade cloud solutions, AI dashboards, and custom software development.">
     <meta name="twitter:image" content="./hero_illustration.jpeg">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="icon" type="image/png" href="./favicon.png">
@@ -777,7 +779,7 @@
     </section>
 
     <!-- Call to Action / Contact -->
-    <section id="contact" class="bg-gradient-to-r py-16 md:py-24 scroll-mt-20">
+    <!-- <section id="contact" class="bg-gradient-to-r py-16 md:py-24 scroll-mt-20">
         <div class="container mx-auto px-4 md:px-6">
             <div class="mx-auto max-w-3xl text-center">
                 <h2 class="text-3xl font-bold tracking-tight text-white md:text-4xl">
@@ -830,7 +832,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Toast Notification -->
     <div id="toast" class="toast" role="alert">
@@ -922,7 +924,7 @@
 
             // Get the submit button
             const submitButton = this.querySelector('button[type="submit"]');
-            
+
             // Disable button and show loading state
             submitButton.disabled = true;
             submitButton.innerHTML = `
@@ -957,10 +959,10 @@
                     // Show toast
                     const toast = document.getElementById('toast');
                     toast.classList.add('show');
-                    
+
                     // Reset form
                     document.getElementById('contactForm').reset();
-                    
+
                     // Hide toast after 3 seconds
                     setTimeout(() => {
                         toast.classList.remove('show');
@@ -971,7 +973,7 @@
                     const toast = document.getElementById('toast');
                     toast.textContent = 'Failed to send message. Please try again later.';
                     toast.classList.add('show');
-                    
+
                     setTimeout(() => {
                         toast.classList.remove('show');
                     }, 3000);
